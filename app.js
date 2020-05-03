@@ -2,6 +2,7 @@ const mongoCollections = require('./config/mongoCollections');
 const users = mongoCollections.users
 
 const express = require('express')
+const session = require('express-session')
 const app = express()
 const bodyParser = require('body-parser')
 
@@ -15,9 +16,22 @@ const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
+app.use(
+	session({
+		name: 'AuthCookie',
+		secret: "This is a secret.. shhh don't tell anyone",
+		saveUninitialized: true,
+		resave: false
+	})
+);
 
 app.get('/', async(req, res) =>{
-    res.render('login')
+  if (req.session.user) {
+		return res.redirect('/dashboard');
+    }
+    else{
+        res.render('login')
+    }        
 })
 
 app.get('/register', async(req, res)=>{
@@ -89,6 +103,7 @@ app.post('/login',async(req, res)=>{
     
     for(i=0; i<playerList.length; i++ ){
       if(playerList[i].UserName == uname && playerList[i].Password == pass){
+        req.session.user = 'user'
          return res.render('dashboard')
          
       }
@@ -98,6 +113,20 @@ app.post('/login',async(req, res)=>{
     return res.render('login',{msg:"Error: invalid username or password"})
 
 })
+
+app.get('/dashboard', async(req, res) =>{
+  if (!req.session.user) {
+		return res.status(403).render('login', { msg: 'Error: You are not logged in'});
+    }else{
+       return res.render('dashboard')
+    }
+})
+
+app.get('/logout', async(req, res) => {
+  req.session.destroy()
+res.render('logout') 
+  
+});
 
 app.get('*', async(req, res) => {
     res.status(404).json({ error: "Not found" })
