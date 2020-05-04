@@ -104,7 +104,7 @@ app.post('/login',async(req, res)=>{
     for(i=0; i<playerList.length; i++ ){
       if(playerList[i].UserName == uname && playerList[i].Password == pass){
         req.session.user = 'user'
-         return res.render('dashboard')
+         return res.redirect('/dashboard')
          
       }
       
