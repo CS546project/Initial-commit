@@ -1,20 +1,30 @@
 const mongoCollections = require('../config/mongoCollections');
-const users = mongoCollections.users
+
 
 const express = require("express");
+const users = mongoCollections.users
+const static = express.static(__dirname + '/public');
 const app = express.Router();
+
+
 //const data = require("../data");
 //const userData = data.user;
 //const bcrypt = require("bcryptjs");
 
+app.use("/public", static);
 
 
 app.get('/', async(req, res) =>{
-    console.log("reached here")
-    res.render('login') 
-           
-  })
-  
+  if (req.session.user) {
+		return res.redirect('/dashboard');
+    }
+    else{
+        res.render('login')
+    }        
+})
+
+
+
   app.get('/register', async(req, res)=>{
     res.render('register')
   })

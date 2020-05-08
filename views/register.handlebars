@@ -1,4 +1,4 @@
-<h3>Account Creation</h3>
+{{!-- <h3>Account Creation</h3>
 <form action = "/register"  id = "login-form" method = "post" >
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value = {{UserName}}><br><br>
@@ -13,3 +13,71 @@
       </form>
       
       <a href="/">Already have an account? Login here</a>
+
+ --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="site.css">
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
+							<form action="/register"  id = "login-form" method="POST" class="my-login-validation" novalidate="">
+								<div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" id="username" name="username"  class="form-control" value = {{UserName}} required autofocus>
+									<div class="invalid-feedback">
+										What's your name?
+									</div>
+								</div>
+
+								<div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="text" id="email" class="form-control" name="email"  value = {{EMAIL}} required>
+									<div class="invalid-feedback">
+										Your email is invalid
+									</div>
+								</div>
+
+								<div class="form-group">
+                  <label for="password">Password :</label>
+                  <input type="password" id="password" class="form-control" name="password" required data-eye>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
+                <div class="form-group">
+                  <label for="password2">Confirm Password :</label>
+                  <input type="password" id="password2" name="password2" class="form-control" required data-eye >
+									<div class="invalid-feedback">
+										Confirm Password is required
+									</div>
+								</div>
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block" value="submit" id="pop">
+										Register
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Already have an account? <a href="/">Login</a>
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+
