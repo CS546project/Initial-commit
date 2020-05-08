@@ -58,7 +58,7 @@ app.get('/', async(req, res) =>{
          return res.render('register', {UserName:uname,msg:"Error: Please enter a valid email"})
       }
   
-    if (!(pass.match("abc"))){
+    if (!(pass.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/))){
       return res.render('register', {UserName:uname, EMAIL:email, msg:"Error: Password must be minimum of eight characters, contain at least one uppercase letter, one lowercase letter and one number"})
     }
     
