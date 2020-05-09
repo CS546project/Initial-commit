@@ -1,2 +1,132 @@
 <h2>Dashboard:Welcome to multiplayer Game</h2>
 <a href="/logout">Click here to Log out</a>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>game dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="site.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<header>
+      {{!-- <h2>Logo</h2>  --}}
+    <h2><p><a href="http://www.stevens.edu">Stevens</a></p></h2>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="sidebar">
+            <div class="loginInfo row">
+                <div class="col-md-3">
+                    <span class="UserIco"><i class="glyphicon glyphicon-user" ></i></span>
+                </div>
+                <div class="col-md-9">
+                    <label>Welcome UserName</label>
+                    <button type="button" class="button submit">Edit Profile</button>
+                </div>
+             </div>
+             <button type="button" id="btnNewGame" type="submit" class="button create"><span class="glyphicon glyphicon-plus-sign"></span>Begin New Quiz</button>
+             <ul class="leftnav">
+                 <li><span><i class="glyphicon glyphicon-user"></i></span>Name:UserName</li>
+                 <li><span><i class="glyphicon glyphicon-asterisk"></i></span>New Playe: {{firstTimePlayer}}</li>
+                 {{!-- <li><span><i class="glyphicon glyphicon-list-alt"></i></span>Previous Score:0</li> --}}
+             </ul>
+             <ul class="leftnav">
+                 <li class="preScore"><span><i class="glyphicon glyphicon-pencil"></i></span>All Previous Score</li>
+                    {{#each gameDetails}}
+                    <li>
+                        <span>Date: {{this.gameDay}} Score: {{this.totalMarks}}</span>
+                    </li>
+                    {{/each}}
+             </ul>
+            
+        </div>
+    
+    <div class="col-md-7">
+        <div class="QuizDetails">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="https://cf.quizizz.com/img/logos/new/logo_placeholder_sm.png">
+                          </a>
+                    </div>
+                    <div class="col-md-9">
+                        <h4>
+                            Quiz Details
+                        </h4>
+                        <ul>
+                            <li>* You will get 20 for every right answer </li>
+                            <li>* You will get 0 for no answer</li>
+                            <li>* You will get -5 for wrong answer</li>
+                        </ul>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+             <form method = "POST" id="myForm" novalidate="">
+            <div class="card">
+                 <div class="row">                 
+                   <div class="Question">
+                    <span class="pull-left labelBorder">Question {{question_no}}</span>
+                    <div class="clearfix"></div>
+                    <h5>
+                    <input type="hidden" id="questionText" name="question" value={{question.question_id}}>
+                     <label> Q. {{question.question}}</label>
+                    </h5>  
+                    <div class="Answer">
+                        <span>Answer Choices</span>
+                    </div>
+                    <div>
+                    <ul class="ulClass">
+                        	{{#each answers}}
+                        <li class="liClass">
+                            <label class="radioMain">{{this.answer}}
+                                {{!-- <input class="rdClass" type="radio" checked="checked" name="selcRadio"  --}}
+                                <input class="rdClass" type="radio" name="selcRadio" value={{this._id}}>
+                                <span class="checkmark"></span>
+                              </label>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    </div>
+                    </div>                    
+                 </div>
+               
+            </div>
+            <div class="NextBtn pull-right">
+                {{!-- <button type="button" class="button create">Previous</button> --}}
+                <button type="submit" id="btnSubmit" class="button submit">Next</button>
+            </div>
+             </form>
+        </div>
+    </div>
+    <div class="col-md-2">
+      <div class="col-md-12">
+            <div id="clockdiv"> 
+                 <h4>Countdown Clock</h4> 
+            <div class="col-md-6 divblock"> 
+                <span class="minutes" id="minute"></span> 
+                <div class="smalltext">M</div> 
+            </div> 
+            <div class="col-md-6 divblock"> 
+                <span class="seconds" id="second"></span> 
+                <div class="smalltext">S</div> 
+            </div> 
+            </div> 
+            <div id="expired" class="expired" hidden></div>
+      </div>
+        {{!-- Right Sec --}}
+    </div>
+    </div>
+</div>
+<script src="/countdown.js"></script>
+</body>
+
+
+</html>
