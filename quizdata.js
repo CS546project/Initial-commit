@@ -4,7 +4,7 @@ const quiz = mongoCollections.quiz
 //console.log(data[0].question)
 
 async function addData(){
-    for(i =0; i<2; i ++){
+    for(i =0; i<data.length; i ++){
         let newQuestion = {
             "Question": data[i].question,
             "Options": data[i].answeroptions,   
@@ -13,7 +13,6 @@ async function addData(){
     
         const quizCollection = await quiz()
         const insertInfo = await quizCollection.insertOne(newQuestion);
-        return console.log("done")
       }
 }
 
