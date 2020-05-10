@@ -14,5 +14,10 @@ const getCollectionFn = collection => {
 };
 
 module.exports = {   
-  users:getCollectionFn("users")
+  users:getCollectionFn("users"),
+  question: getCollectionFn("Questions"),
+  answer:getCollectionFn("Answers"),
+  playerAnswers:getCollectionFn("PlayerAnswers"),
+  gameSummary:getCollectionFn("gameSummary"),
+  score:getCollectionFn("score")
 };
