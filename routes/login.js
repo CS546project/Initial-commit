@@ -12,9 +12,10 @@ router.get("/", async (req, res,next) => {
     try {
         if(req.session.user){
             res.redirect("/leaderBoard");
+            
         }
         else{
-            res.redirect("/leaderBoard");
+            res.render("MultiPlayerGame/login");
         }
 
     
