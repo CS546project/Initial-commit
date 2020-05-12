@@ -34,7 +34,7 @@ router.post("/", async (req, res,next) => {
     }
     // res.redirect("/dashboard");
     else{
-        res.render("MultiPlayerGame/login",{'error':"Invalid user id or password",'data':req.body});
+        res.render("MultiPlayerGame/login",{'error':"password does not match, please enter right password.",'data':req.body});
     }}
 
     }
