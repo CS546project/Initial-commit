@@ -7,7 +7,13 @@ const xss = require("xss");
 
 router.get("/", async (req, res,next) => {
     try {
-       res.render("MultiPlayerGame/register");
+        if(req.session.user){
+            res.redirect("/leaderBoard");
+        }
+        else{
+            res.render("MultiPlayerGame/register");
+        }
+       
     }
     catch(e){
         res.status(400).render('MultiPlayerGame/error', { 'err': e })
