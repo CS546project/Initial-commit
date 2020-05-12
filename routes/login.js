@@ -10,8 +10,12 @@ const localStorage = require("localStorage");
 
 router.get("/", async (req, res,next) => {
     try {
+    if(!req.session.user){
     res.render("MultiPlayerGame/login");
     }
+    else{
+        res.redirect("/leaderBoard");
+    }}
     catch(e){
         res.status(400).render('MultiPlayerGame/error', { 'err': e })
     }
