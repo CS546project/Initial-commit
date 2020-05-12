@@ -16,7 +16,8 @@ function onSignIn(googleUser){
     success: function(res)
     { 
         alert("gmail sign in sucessfull ");
-        myForm.submit();       
+        myForm.submit(); 
+        
  },
 
 });
