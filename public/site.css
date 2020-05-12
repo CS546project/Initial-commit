@@ -502,3 +502,22 @@ ul.leftnav li div span{
 .h6Div{
     font-size: 12px;
 }
+
+.chatbtn{
+    display: inline-block;
+    text-align: center;
+    float:left;
+
+}
+.playGame{
+    display: inline-block;
+    text-align: center;
+    float: left;
+    margin-left: 10px;
+}
+
+.chat{
+    float:right;
+    margin-top: 15px;
+    margin-right: 10px;
+}

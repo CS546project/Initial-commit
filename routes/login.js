@@ -14,7 +14,7 @@ router.get("/", async (req, res,next) => {
             res.redirect("/leaderBoard");
         }
     else{
-        res.render("MultiPlayerGame/login");
+            
     }    
     
     }
