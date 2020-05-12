@@ -36,13 +36,7 @@ s.innerText = seconds
 }, 1000); 
 }})
 
-btnNewGame.addEventListener('click',(event)=>{
-  myForm.submit();
-//location.reload();
-})
-  
 if(quesNo<5){
   setTimeout(countdown, 1000);
 }
-
 
