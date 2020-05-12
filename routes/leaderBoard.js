@@ -17,7 +17,7 @@ router.post("/", async (req, res,next) => {
         req.session.user = req.body['player'];
         }
        const getLeaderBoardData = await score.getTopPlayer();
-       res.render("MultiPlayerGame/leaderBoard",{'winnerData':getLeaderBoardData ,'user' : player1}});
+       res.render("MultiPlayerGame/leaderBoard",{'winnerData':getLeaderBoardData ,'user' : player1});
 
     }
     else{
