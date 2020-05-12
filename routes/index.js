@@ -28,8 +28,12 @@ app.use("/dashboard", questionRoutes);
 app.use("/result", resultRoutes);
 
 app.get('/', (req, res) => {
-    //res.sendFile(path.resolve('public/index.html'));
-    res.render('MultiPlayerGame/login');
+  if(req.session.user){
+    res.redirect("/leaderBoard");
+}
+ else{
+  res.render('MultiPlayerGame/login');
+ }
 });
 
   app.use("*", (req, res) => {
