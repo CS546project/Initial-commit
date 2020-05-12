@@ -5,6 +5,61 @@
 <title>Game Dashboard</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type='text/javascript' src="/socket.io/socket.io.js"></script>
+<script>
+
+
+        player1points=0;
+        player2points=0;
+        var socket = io.connect()
+       
+        //socket.on() gets data from the server
+        socket.on('connectToRoom',function(data) {
+            document.getElementById('h1').innerHTML = data;
+
+         });
+
+
+        
+         
+
+        $(document).ready(function(){
+            socket.on('updateHeader',function(data){
+                let textInput = document.getElementById('msg')
+               
+                let test = document.getElementById('attempts')
+                let li = document.createElement('li')
+                
+                li.innerHTML= data
+                test.appendChild(li);
+                document.getElementById('li').innerHTML= data;
+                
+            });
+            
+            
+        });
+        function submitMessage(){
+            
+            var message= $('#msg').val();
+            var chatuser = document.getElementById('usertesting').textContent
+           
+            message = "<label style='color:red'>" + chatuser.split(" ")[1] + ":</label>" + message
+            //socket.emit('sendmsg',messsage) sends message to server and is catched by send msg function in server
+            socket.emit('sendmsg',message);
+            
+        }
+
+        var senduser = document.getElementById('selfuser').textContent
+        socket.broadcast.emit('updatepname',senduser);
+
+        socket.on('updateotherpname',function(data){
+            alert(data)
+                document.getElementById('otheruser').innerHTML = data;
+        });
+
+        
+    </script>
+
 <link href="site.css" type="text/css" rel="stylesheet" />
 </head>
 
@@ -20,7 +75,7 @@
                     <span class="UserIco"><i class="glyphicon glyphicon-user" ></i></span>
                 </div>
                 <div class="col-md-9">
-                    <label>Welcome: {{user}}</label>
+                    <label id="usertesting">Welcome: {{user}}</label>
                 </div>
              </div>
              <ul class="leftnav">
@@ -118,9 +173,10 @@
             <div id="expired" class="expired" hidden></div>
       </div>
     </div>
-    </div>
 </div>
 {{!-- <script src="/countdown.js"></script> --}}
+
+
 </body>
 
 

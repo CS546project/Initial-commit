@@ -2,6 +2,7 @@ const questionRoutes = require("./questions");
 const resultRoutes = require("./result");
 const registerData = require("./register");
 const loginData = require("./login");
+const Chatroomdata = require("./chatroom");
 const forgetPassword = require("./forgetPassword");
 const leaderBoradData = require("./leaderBoard");
 // const path = require('path');
@@ -12,6 +13,8 @@ const constructorMethod = app => {
 app.use("/register", registerData);
 
 app.use("/login", loginData);
+
+app.use("/chatroom", Chatroomdata);
 
 app.use("/forgetPassword",forgetPassword);
 

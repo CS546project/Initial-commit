@@ -5,15 +5,32 @@
 <title>Leader Board</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 <link href="site.css" type="text/css" rel="stylesheet" />
+<script type='text/javascript' src="/socket.io/socket.io.js"></script>
 </head>
 
 <body class="bodyImg">
 <header>
      <img class="imgSize" src="/image/cool-geek-logo-vector-2088780.png" alt="imgDescription">
 </header>
+<script>
+
+    var senduser = document.getElementById('selfuser').textContent
+        socket.broadcast.emit('updatepname',senduser);
+
+
+</script>
 <div class="card winnersDashboard">
     <h4>Start Your Game And Test Your Knowledge.You have a chance to make your position.</h4>
-    <form action="/dashboard" method="GET">
+    <label >Welcome :{{user}}</label>
+    <form action="/chatroom" method="get">
+    <input id="uname" type="hidden" value={{user}}>
+    
+    
+    <div class="startGameBtn"> <button type="submit" class="button submit">Go to Chatroom</button></div>
+    </form>
+    <form action="/dashboard" method="get">
+    <input id="uname" type="hidden" value={{user}}>
+    
     <div class="startGameBtn"> <button type="submit" class="button submit">Start Your Game</button></div>
    </form>
     <ul>

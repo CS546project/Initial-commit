@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+	<h1></h1>
 <head>
 	<meta charset="utf-8">
 	<meta name="author" content="Kodinger">
@@ -56,6 +57,31 @@
 		</div>
 	</section>
 	<script src="/gmailSignIn.js"></script>
+	<script type='text/javascript' src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+            var socket = io.connect()
+        socket.on('connectToRoom',function(data) {
+            document.getElementById('h1').innerHTML = data;
+
+         });
+          $(document).ready(function(){
+            socket.on('updateHeader',function(data){
+                let textInput = document.getElementById('msg')
+                
+                let test = document.getElementById('attempts')
+                let li = document.createElement('li')
+                
+                li.innerHTML= data
+                test.appendChild(li);
+                document.getElementById('li').innerHTML= data;
+                
+            });
+            
+        });
+</script>
+
+
 </body>
 </html>
 

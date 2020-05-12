@@ -32,6 +32,8 @@ if(req.session.user){
         {
           const question = await questionData.getQuestionsbyId(totalRequests);
           const answer = await questionData.getAnswers(question.question_id);
+         
+          //res.render('MultiPlayerGame/test')
           res.render('MultiPlayerGame/dashboard', { 'question': question, 'answers':answer, 'question_no':totalRequests+1, 'firstTimePlayer':firstTimePlayer, 'gameDetails':gameDetails,'user':player, 'reqNo':totalRequests});
           totalRequests ++;
         }
@@ -81,6 +83,8 @@ router.post("/", async (req, res,next) => {
       const saveAns = await questionData.saveAnswers(constQuesId,constAnsId,true,totalRequests,player);
       const question = await questionData.getQuestionsbyId(totalRequests);
       const answer = await questionData.getAnswers(question.question_id);
+      
+      //res.render('MultiPlayerGame/test')
       res.render('MultiPlayerGame/dashboard', { 'question': question, 'answers':answer, 'question_no':totalRequests+1, 'firstTimePlayer':firstTimePlayer, 'gameDetails':gameDetails, 'user':player, 'reqNo':totalRequests});
       totalRequests++;
       }
@@ -122,4 +126,6 @@ router.post("/", async (req, res,next) => {
     }
   });
 
+
+  
   module.exports = router;

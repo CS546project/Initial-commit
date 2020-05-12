@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Game Dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type='text/javascript' src="/socket.io/socket.io.js"></script>
+<script type='text/javascript' src='js/jquery.ba-hashchange.min.js'></script>
+<script type='text/javascript' src='js/dynamicpage.js'></script>
+<script>
+
+
+        player1points=0;
+        player2points=0;
+        var socket = io.connect()
+       
+        //socket.on() gets data from the server
+        socket.on('connectToRoom',function(data) {
+            document.getElementById('h1').innerHTML = data;
+            
+            
+         });
+        
+        socket.on('activeusers',function(data) {
+            
+            var chatuser = document.getElementById('usertesting').textContent
+            var username = chatuser.split(" ")[1]
+            socket.emit('adduser',username);
+            alert(username)
+
+            let test = document.getElementById('users')
+            let li = document.createElement('li')
+            li.innerHTML = username
+            test.appendChild(li);
+
+         });
+
+        
+         
+
+        $(document).ready(function(){
+            socket.on('updateHeader',function(data){
+                let textInput = document.getElementById('msg')
+               
+                let test = document.getElementById('attempts')
+                let li = document.createElement('li')
+                
+                li.innerHTML= data
+                test.appendChild(li);
+                document.getElementById('li').innerHTML= data;
+                
+            });
+            
+            
+        });
+        function submitMessage(){
+            
+            var message= $('#msg').val();
+            var chatuser = document.getElementById('usertesting').textContent
+           
+            message = "<label style='color:red'>" + chatuser.split(" ")[1] + ":</label>" + message
+            //socket.emit('sendmsg',messsage) sends message to server and is catched by send msg function in server
+            socket.emit('sendmsg',message);
+            document.getElementById('msg').value = ""
+            
+        }
+
+        var senduser = document.getElementById('selfuser').textContent
+        socket.broadcast.emit('updatepname',senduser);
+
+        socket.on('updateotherpname',function(data){
+            alert(data)
+                document.getElementById('otheruser').innerHTML = data;
+        });
+
+        
+    </script>
+
+    
+<link href="site.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="bodyImg">
+<header>
+     <img class="imgSize" src="/image/cool-geek-logo-vector-2088780.png" alt="imgDescription">
+</header>
+    <label id="usertesting">Welcome: {{user}}</label>
+    <form action="/leaderBoard" method="get">
+    <input id="uname" type="hidden" value={{user}}>
+    
+    
+    <div class="startGameBtn"> <button style="display: inline;" type="submit" class="button submit">Go to Leader Board</button></div>
+    </form>
+    <form action="/dashboard" method="get">
+    <input id="uname" type="hidden" value={{user}}>
+    
+    <div class="startGameBtn"> <button style="display: inline;" type="submit" class="button submit">Start Your Game</button></div>
+   </form>
+    <div class="card">
+        
+        <h2 style="display: inline;">Room Number : </h2><h1 style="display: inline;" id="h1"></h1>
+        <br><br>
+        
+        <h6>You can communicate with the other players using this following dialog box</h6>
+
+        <form>
+    <input id="msg" type="text" name="message" value="">
+    <input id="btn" type="button" name="send" value="Send" onclick="submitMessage()">
+
+</form>
+
+    <ul id="users">
+    </ul>
+
+    <ul id='attempts'>
+
+    </ul>
+       
+    </div>
+    
+
+</body>
+</html>
