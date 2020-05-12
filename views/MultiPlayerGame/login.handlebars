@@ -9,42 +9,43 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="site.css">
 
+
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <meta name="google-signin-client_id" content="446457719578-79ej4j039phvviac052di40ugqh5q572.apps.googleusercontent.com">
 </head>
 <body class="my-login-page bodyImg">
-	<section class="h-100">
+	<section>
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="card fat forgetPass">
 						<div class="card-body">
-							<h4 class="card-title">Login</h4>
-							<form id="loginForm" action="/login" method="Post" class="my-login-validation" novalidate="">
+							<div class="card-title txtLabel h4Div">Login</div>
+							<form id="loginForm" action="/login" method="Post">
 								<div class="form-group">
 									<div class = 'error'>
 										{{#if error}}
-											<p class="errorText">{{error}}</p>
+											<p class="errorText">Error: Invalid username or password</p>
 										{{/if}}
 									</div>
-									<label for="userName">User Name</label>
+									<label class="txtLabel" for="userName">User Name</label>
 									<input id="userName" class="form-control" name="userName" value={{data.userName}}>
 								</div>
 
 								<div class="form-group">
-									 <label for="password">Password </label> 
+									 <label class="txtLabel" for="password">Password </label> 
 										<a href="forgetPassword" class="float-right forgetPass">
 											Forgot Password?
 										</a>
 									<input id="password" type="password" class="form-control" name="password">
 								</div>
 								<div class="form-group m-0">
-									<button id="btnLogin" type="submit" class="btn btn-primary btn-block">
+									<button id="btnLogin" type="submit" class="btn btn-primary btn-block" onclick="loginVal()">
 										Login
 									</button>
 									<div class="mt-4 text-center">
-									Don't have an account? <a href="register">Create One</a>
+									<span class="txtLabel">Don't have an account?</span><a href="register" class="forgetPass">Create One</a>
 								    </div>
 									 <div class="g-signin2" data-onsuccess = "onSignIn"></div>
 								</div>
@@ -56,6 +57,7 @@
 			</div>
 		</div>
 	</section>
+	<script src='loginValidation.js'></script>
 	<script src="/gmailSignIn.js"></script>
 	<script type='text/javascript' src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>

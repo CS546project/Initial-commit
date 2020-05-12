@@ -1,5 +1,6 @@
 let loginForm = document.getElementById('loginForm');
 let btnLogin = document.getElementById('btnLogin');
+let myForm = document.getElementById('loginForm');
 
 function onSignIn(googleUser){
     let profile = googleUser.getBasicProfile();
@@ -12,12 +13,18 @@ function onSignIn(googleUser){
     url: url,
     type: 'POST',
     data: {'player': name },
-    success: function(html)
+    success: function(res)
     { 
+        alert("gmail sign in sucessfull ");
+        myForm.submit(); 
+        
  },
 
 });
 
-    // loginForm.submit()
+var auth2 = gapi.auth2.getAuthInstance();
+auth2.signOut().then(function () {
+});
+auth2.disconnect();
 
 }

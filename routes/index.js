@@ -5,6 +5,7 @@ const loginData = require("./login");
 const Chatroomdata = require("./chatroom");
 const forgetPassword = require("./forgetPassword");
 const leaderBoradData = require("./leaderBoard");
+const logoutData = require("./logout");
 // const path = require('path');
 const xss = require("xss");
 
@@ -17,6 +18,8 @@ app.use("/login", loginData);
 app.use("/chatroom", Chatroomdata);
 
 app.use("/forgetPassword",forgetPassword);
+
+app.use("/logout",logoutData);
 
 app.use("/leaderBoard",leaderBoradData);
 

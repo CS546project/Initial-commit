@@ -6,59 +6,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type='text/javascript' src="/socket.io/socket.io.js"></script>
-<script>
-
-
-        player1points=0;
-        player2points=0;
-        var socket = io.connect()
-       
-        //socket.on() gets data from the server
-        socket.on('connectToRoom',function(data) {
-            document.getElementById('h1').innerHTML = data;
-
-         });
-
-
-        
-         
-
-        $(document).ready(function(){
-            socket.on('updateHeader',function(data){
-                let textInput = document.getElementById('msg')
-               
-                let test = document.getElementById('attempts')
-                let li = document.createElement('li')
-                
-                li.innerHTML= data
-                test.appendChild(li);
-                document.getElementById('li').innerHTML= data;
-                
-            });
-            
-            
-        });
-        function submitMessage(){
-            
-            var message= $('#msg').val();
-            var chatuser = document.getElementById('usertesting').textContent
-           
-            message = "<label style='color:red'>" + chatuser.split(" ")[1] + ":</label>" + message
-            //socket.emit('sendmsg',messsage) sends message to server and is catched by send msg function in server
-            socket.emit('sendmsg',message);
-            
-        }
-
-        var senduser = document.getElementById('selfuser').textContent
-        socket.broadcast.emit('updatepname',senduser);
-
-        socket.on('updateotherpname',function(data){
-            alert(data)
-                document.getElementById('otheruser').innerHTML = data;
-        });
-
-        
-    </script>
 
 <link href="site.css" type="text/css" rel="stylesheet" />
 </head>
@@ -106,15 +53,14 @@
                           </a>
                     </div>
                     <div class="col-md-9">
-                        <h4>
+                            <div class="h4Div">
                             Quiz Details
-                        </h4>
+                            </div>
                         <ul class="gameInfo">
                             <li>* You will get 20 for every right answer </li>
                             <li>* You will get 0 for no answer</li>
                             <li>* You will get -5 for wrong answer</li>
                         </ul>
-                        {{!-- <hr /> --}}
                     </div>
                 </div>
             </div>
@@ -125,10 +71,10 @@
                     <span class="pull-left labelBorder">Question {{question_no}}</span>
                     <input type="hidden" id="quseNo" name="quseNo" value={{reqNo}}>
                     <div class="clearfix"></div>
-                    <h5>
+                    <div class="h5Div">
                     <input type="hidden" id="questionText" name="question" value={{question.question_id}}>
                      <label> Q. {{question.question}}</label>
-                    </h5>  
+                    </div>  
                     <div class="Answer">
                         <span>Answer Choices</span>
                     </div>
@@ -148,7 +94,6 @@
                     </div>
                     </div>                    
                  </div>
-               
             </div>
             <div class="NextBtn pull-right">
                 {{!-- <button type="button" class="button create">Previous</button> --}}
@@ -160,7 +105,7 @@
     <div class="col-md-2">
       <div class="col-md-12">
             <div id="clockdiv"> 
-                 <h4>Countdown Clock</h4> 
+                 <div class="h4Div">Countdown Clock</div>
             <div class="col-md-6 divblock"> 
                 <span class="minutes" id="minute"></span> 
                 <div class="smalltext">M</div> 
@@ -174,8 +119,8 @@
       </div>
     </div>
 </div>
-{{!-- <script src="/countdown.js"></script> --}}
 
+<script src="/countdown.js"></script>
 
 </body>
 

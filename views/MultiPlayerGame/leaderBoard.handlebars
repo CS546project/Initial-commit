@@ -20,7 +20,10 @@
 
 </script>
 <div class="card winnersDashboard">
-    <h4>Start Your Game And Test Your Knowledge.You have a chance to make your position.</h4>
+
+<div class="h4Div">
+        Start Your Game And Test Your Knowledge.You have a chance to make your position.
+    </div>
     <label >Welcome :{{user}}</label>
     <form action="/chatroom" method="get">
     <input id="uname" type="hidden" value={{user}}>
@@ -38,18 +41,20 @@
                 {{#each winnerData}}
                 <div class="card winnerList">
                     <div class="listMain">
-                                <div class="winner"><img src="/image/userImg2.png" alt="" class="userImgSize"></div>
+                                <div class="winner"><img src="/image/userImg2.png" alt="imgDesc" class="userImgSize"></div>
                                 <div class="winnerdetails">
-                                    {{!-- <h4>Rank 1: 1</h4> --}}
-                                    <h5>Name: {{this.playerid}}</h5>
-                                    <h6>Score: {{this.totalMarks}}</h6>
+                                    <div class="h5Div">Name: {{this.playerid}}</div>
+                                     <div class="h6Div">Score: {{this.totalMarks}}</div>
                                 </div>
-                                <div class="trophy"><img src="/image/trophy-img1.png" alt="" class="trophyImgSize"></div>
+                                <div class="trophy"><img src="/image/trophy-img1.png" alt="imgDesc" class="trophyImgSize"></div>
                     </div>
                 </div>
                  {{/each}}
             </li>      
     </ul>
+</div>
+<div class="mt-4 text-center">
+want to log out? <a href="/logout">logout</a>`
 </div>
 </body>
 

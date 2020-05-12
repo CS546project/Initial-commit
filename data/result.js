@@ -83,8 +83,6 @@ async function addGameSummary(player, level, questionId, marks, timetaken, sumId
      if(updatedInfo.modifiedCount === 0){
          throw `could not update question ${question_id}`;
      }
-
-    console.log(newId);
 }
 
 async function getResult(player){
@@ -97,7 +95,7 @@ async function getResult(player){
 }
 
 async function countTotalMarks(player){
-    console.log(player);
+
     const gameSumVal = await gameSummmaycollection();
     const result = await gameSumVal.find({playerid : player }).toArray();
 
@@ -109,25 +107,21 @@ async function countTotalMarks(player){
            if(sign === "+"){
              str = result[i].marks.replace("+","");
             totalMarks = parseInt(totalMarks) + parseInt(str);
-            console.log(result[i]._id);
             await clearPlayerSummary(result[i]._id);
            }
            else if(sign === "-"){
             str = result[i].marks.replace("-","");
             totalMarks = parseInt(totalMarks) - parseInt(str);
-            console.log(result[i]._id);
             await clearPlayerSummary(result[i]._id);
            }
        }
        else if(result[i].marks == "0"){
-       console.log(result[i]._id);
        await clearPlayerSummary(result[i]._id);
        }
     }
 
     await addGameScore(player,totalMarks,getTodaysDate());
 
-    console.log(totalMarks);
     return totalMarks;
 }
 
@@ -154,22 +148,20 @@ async function addGameScore(playerid,totalMarks, gameDay ){
     if (insertInfo.insertedCount === 0) throw 'Could not add band';
 
     const newId = insertInfo.insertedId;
-    console.log(newId);
 }
 
 async function clearPlayerSummary(playerSumId){
 
     const gameSumVal = await gameSummmaycollection();
-    console.log(playerSumId);
+
     if(typeof playerSumId !="object"){
         playerSumId = ObjectId.createFromHexString(playerSumId);
     }
-console.log("i am here");
     const playerSummary = await gameSumVal.removeOne({_id:playerSumId})
     if (playerSummary.deletedCount === 0) {
         throw `Could not remove player ${player}`;
     }
-    console.log("delete done");
+
 } 
 
 module.exports = {

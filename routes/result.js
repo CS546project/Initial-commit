@@ -8,9 +8,7 @@ const path = require('path');
 
 router.get("/result", async (req, res,next) => {
     try {
-        console.log("in result");
         const resultData = await resultData.generateResult();
-        console.log(resultData);
     }
     catch(e){
 

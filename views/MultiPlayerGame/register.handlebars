@@ -9,14 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="site.css">
 </head>
 <body class="my-login-page bodyImg">
-	<section class="h-100">
+	<section>
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="card fat playerReg">
 						<div class="card-body">
-							<h4 class="card-title">Register</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<div class="card-title h4Div">Register</div>
+							<form method="POST" id = "register-form" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<div class = 'error'>
 										{{#if error}}
@@ -51,7 +51,7 @@
 									</button>
 								</div>
 								<div class="mt-4 text-center">
-									Already have an account? <a href="login">Login</a>
+									<span class="txtLabel">Already have an account?</span><a href="login" class="forgetPass">Login</a>
 								</div>
 							</form>
 						</div>
@@ -60,5 +60,6 @@
 			</div>
 		</div>
 	</section>
+	<script src='registerValidation.js'></script>
 </body>
 </html>

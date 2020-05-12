@@ -5,10 +5,6 @@ const ObjectId = require('mongodb').ObjectID;
 const playerAnsCollection = collection.playerAnswers;
 
 async function addAnswer(question_id, answer, isCorrect ){
-console.log("in answers");
-console.log(question_id);
-console.log(answer);
-console.log(isCorrect);
    // if (!question_id || !answer || !isCorrect) throw 'input data is not provided';
     const ansVal = await ansCollection();
     let newAnswer = {
@@ -21,7 +17,7 @@ console.log(isCorrect);
     if (insertInfo.insertedCount === 0) throw 'Could not add band';
 
     const newId = insertInfo.insertedId;
-    console.log(newId);
+    
     const addAnswerToQues = await this.addAnswerToQuestion(question_id, newId);
 }
 

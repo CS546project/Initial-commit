@@ -2,6 +2,7 @@ const dbConnection = require('../config/mongoConnection');
 const data = require('../data/');
 const question = data.questions;
 const answer = data.answers;
+const register = data.register;
 const collection = require('../config/mongoCollections');
 const quescollection = collection.question;
 const anscollection = collection.answer;
@@ -12,6 +13,9 @@ const main = async () => {
     await db.dropDatabase();
     console.log("start");
  
+    //register a player login
+    const firstPlayer = await register.registerPlayer("lemon","pgupta14@stevens.edu","Lemon@123,Lemon@123");
+
     // Insert 1st question and answer   
     const firstQuestion = await question.addQuestion(
         "1", "What is the HTML tag under which one can write the JavaScript code?",'1',[]

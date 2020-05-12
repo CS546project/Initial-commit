@@ -24,8 +24,6 @@ if(req.session.user){
   else{
     firstTimePlayer = "yes";
   }
-
-  console.log(totalReq.length);
   if(totalReq.length > 0)
       {
         if(totalRequests <= totalReq.length)
@@ -98,8 +96,9 @@ router.post("/", async (req, res,next) => {
         const result = await resultData.generateResult(player);
 
         const getResult = await resultData.getResult(player);
-        console.log(player);
+
          const totalMarks = await resultData.countTotalMarks(player);
+
         totalRequests = 0;
        // const totalMarks  = 0;
         req.session.destroy();
@@ -108,10 +107,10 @@ router.post("/", async (req, res,next) => {
       }
       else{
         const getResult = await resultData.getResult(player);
-        console.log(getResult);
+
         const totalMarks = await resultData.countTotalMarks(player);
        // const totalMarks  = 0;
-        console.log(totalMarks);
+       
         totalRequests = 0;
         req.session.destroy();
         res.clearCookie('AuthCookie');

@@ -249,7 +249,9 @@ h4{
     position: absolute;
     top: -10px;
     left: 15px;
-    color: darkgrey;
+    /*totally fix*/
+    /* color: darkgrey; */
+    color: #767676 ;
     font-size: 12px;
     background: #fff;
     padding: 2px 5px;
@@ -483,4 +485,20 @@ ul.leftnav li div span{
 }
 .txtLabel{
     color: black;
+}
+
+/* totally fix*/
+
+.h4Div{
+    color: #333;
+    font-size: 15px;
+}
+
+.h5Div{
+    color: #333;
+    font-size: 14px;
+}
+
+.h6Div{
+    font-size: 12px;
 }
