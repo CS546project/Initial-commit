@@ -26,7 +26,8 @@ router.get("/", async (req, res,next) => {
 })
 router.post("/", async (req, res,next) => {
     try {
-    console.log(req.session.user); 
+
+    req.session.totalRequests = 0;
     if(req.session.user){
         res.redirect("/leaderBoard");
     }

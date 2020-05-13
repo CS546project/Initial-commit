@@ -26,21 +26,21 @@ if(req.session.user){
   }
   if(totalReq.length > 0)
       {
-        if(totalRequests <= totalReq.length)
+        if(req.session.totalRequests <= totalReq.length)
         {
-          const question = await questionData.getQuestionsbyId(totalRequests);
+          const question = await questionData.getQuestionsbyId(req.session.totalRequests);
           const answer = await questionData.getAnswers(question.question_id);
          
           //res.render('MultiPlayerGame/test')
-          res.render('MultiPlayerGame/dashboard', { 'question': question, 'answers':answer, 'question_no':totalRequests+1, 'firstTimePlayer':firstTimePlayer, 'gameDetails':gameDetails,'user':player, 'reqNo':totalRequests});
-          totalRequests ++;
+          res.render('MultiPlayerGame/dashboard', { 'question': question, 'answers':answer, 'question_no':req.session.totalRequests+1, 'firstTimePlayer':firstTimePlayer, 'gameDetails':gameDetails,'user':player, 'reqNo':req.session.totalRequests});
+          req.session.totalRequests ++;
         }
         else{
           const getResult = await resultData.getResult();
           const totalMarks = await resultData.countTotalMarks();
           req.session.destroy();
           res.clearCookie('AuthCookie');
-          totalRequests = 0;
+          req.session.totalRequests = 0;
           res.render('MultiPlayerGame/result',{'data':getResult , 'totalMarks':totalMarks});
         }
       }
@@ -51,7 +51,7 @@ if(req.session.user){
   else
   res.status(400).render('MultiPlayerGame/login', { 'error': 'please login' });
  } catch (e) {
-  totalRequests = 0;
+  req.session.totalRequests = 0;
   req.session.destroy();
   res.clearCookie('AuthCookie');
   res.render('MultiPlayerGame/result',{'data':"no value" , 'totalMarks':0});
@@ -77,32 +77,32 @@ router.post("/", async (req, res,next) => {
       if(totalReq.length > 0 ){
 
       // for saving the question and getting the next question and answer
-      if(totalRequests < totalReq.length)
+      if(req.session.totalRequests < totalReq.length)
       {
       constQuesId = xss(req.body.question);
       constAnsId = xss(req.body.selcRadio);
-      const saveAns = await questionData.saveAnswers(constQuesId,constAnsId,true,totalRequests,player);
-      const question = await questionData.getQuestionsbyId(totalRequests);
+      const saveAns = await questionData.saveAnswers(constQuesId,constAnsId,true,req.session.totalRequests,player);
+      const question = await questionData.getQuestionsbyId(req.session.totalRequests);
       const answer = await questionData.getAnswers(question.question_id);
       
       //res.render('MultiPlayerGame/test')
-      res.render('MultiPlayerGame/dashboard', { 'question': question, 'answers':answer, 'question_no':totalRequests+1, 'firstTimePlayer':firstTimePlayer, 'gameDetails':gameDetails, 'user':player, 'reqNo':totalRequests});
-      totalRequests++;
+      res.render('MultiPlayerGame/dashboard', { 'question': question, 'answers':answer, 'question_no':req.session.totalRequests+1, 'firstTimePlayer':firstTimePlayer, 'gameDetails':gameDetails, 'user':player, 'reqNo':req.session.totalRequests});
+      req.session.totalRequests++;
       }
 
       // for saving the last question
-      else if(totalRequests == totalReq.length){
+      else if(req.session.totalRequests == totalReq.length){
         constQuesId = xss(req.body.question);
         constAnsId = xss(req.body.selcRadio);
-        const saveAns = await questionData.saveAnswers(constQuesId,constAnsId,true,totalRequests,player);
-        totalRequests++;
+        const saveAns = await questionData.saveAnswers(constQuesId,constAnsId,true,req.session.totalRequests,player);
+        req.session.totalRequests++;
         const result = await resultData.generateResult(player);
 
         const getResult = await resultData.getResult(player);
 
          const totalMarks = await resultData.countTotalMarks(player);
 
-        totalRequests = 0;
+         req.session.totalRequests = 0;
        // const totalMarks  = 0;
         req.session.destroy();
         res.clearCookie('AuthCookie');
@@ -114,7 +114,7 @@ router.post("/", async (req, res,next) => {
         const totalMarks = await resultData.countTotalMarks(player);
        // const totalMarks  = 0;
        
-        totalRequests = 0;
+       req.session.totalRequests = 0;
         req.session.destroy();
         res.clearCookie('AuthCookie');
         res.render('MultiPlayerGame/result',{'data':getResult , 'totalMarks':totalMarks});

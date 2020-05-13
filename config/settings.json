@@ -1,6 +1,6 @@
 {
     "mongoConfig": {
       "serverUrl": "mongodb://localhost:27017/",
-      "database": "Multiplayer_GameTest"
+      "database": "Multiplayer_Game"
     }
   }
