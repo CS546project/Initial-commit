@@ -2,7 +2,7 @@ const collection = require('../config/mongoCollections');
 const ObjectId = require('mongodb').ObjectID;
 const playerCollection = collection.player;
 const bcrypt = require("bcryptjs");
-const saltRounds = 16;
+const saltRounds = 5;
 
 async function registerPlayer(uname, email, pass ){
 let error;
@@ -48,7 +48,7 @@ let error;
        console.log(hashPassword);
       
       let newPlayer = {
-          "UserName": uname,
+          "UserName": uname.toLowerCase(),
           "Email": email,   
           "Password": hashPassword
       };
@@ -61,7 +61,7 @@ async function getRegisteredPlayer(userName,userPassword){
 
   const playerCollVal = await playerCollection();
 
-  const getDetails = await playerCollVal.findOne({UserName :userName });
+  const getDetails = await playerCollVal.findOne({UserName :userName.toLowerCase()});
   if(getDetails != null){
   const dbPassword = getDetails.Password;
   return await bcrypt.compareSync(userPassword,dbPassword);
