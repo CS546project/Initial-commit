@@ -521,3 +521,8 @@ ul.leftnav li div span{
     margin-top: 15px;
     margin-right: 10px;
 }
+
+.logout{
+    float: left;
+    margin-left: 10px;
+}

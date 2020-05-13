@@ -51,7 +51,10 @@ if(req.session.user){
   else
   res.status(400).render('MultiPlayerGame/login', { 'error': 'please login' });
  } catch (e) {
-    res.status(400).render('MultiPlayerGame/error', { 'err': e });
+  totalRequests = 0;
+  req.session.destroy();
+  res.clearCookie('AuthCookie');
+  res.render('MultiPlayerGame/result',{'data':"no value" , 'totalMarks':0});
   }
 });
 
