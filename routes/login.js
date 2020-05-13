@@ -10,7 +10,15 @@ const localStorage = require("localStorage");
 
 router.get("/", async (req, res,next) => {
     try {
-    res.render("MultiPlayerGame/login");
+        if(req.session.user){
+            res.redirect("/leaderBoard");
+            
+        }
+        else{
+            res.render("MultiPlayerGame/login");
+        }
+
+    
     }
     catch(e){
         res.status(400).render('MultiPlayerGame/error', { 'err': e })
@@ -34,7 +42,7 @@ router.post("/", async (req, res,next) => {
     }
     // res.redirect("/dashboard");
     else{
-        res.render("MultiPlayerGame/login",{'error':"Invalid user id or password",'data':req.body});
+        res.render("MultiPlayerGame/login",{'error':"password does not match, please enter right password.",'data':req.body});
     }}
 
     }

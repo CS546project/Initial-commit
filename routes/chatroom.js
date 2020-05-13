@@ -6,7 +6,6 @@ const data = require("../data");
 //let totalTime = new Date();
 router.get("/", async (req, res,next) => {
     try {
-        console.log(req.body['player']);
     if(req.session.user || req.body['player']){
         const player = req.session.user;
        
@@ -27,7 +26,6 @@ router.post("/", async (req, res,next) => {
         if(req.session.user || req.body['player']){
             const player = req.session.user;
        const getLeaderBoardData = await score.getTopPlayer();
-       console.log(getLeaderBoardData);
        res.render("MultiPlayerGame/chatrooom",{'user' : player});
         }
         else{
