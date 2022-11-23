@@ -18,7 +18,7 @@
     "localStorage": "^1.0.4",
     "mongodb": "^3.5.7",
     "node-sessionstorage": "^1.0.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "xss": "^1.0.6"
   },
   "repository": {
